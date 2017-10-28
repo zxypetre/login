@@ -1,0 +1,76 @@
+<html>
+        <head>
+            <title>registered Page</title>
+            <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js"></script>
+            <script type="text/javascript">
+            $(document).ready(function(){
+            $("#button").click(function(){
+            $.ajax({
+                    type:'POST',
+                    url:'/registered',
+                    data:{username:$('#username').val(),
+                        Email:$('#email').val(),
+                        password:$('#password').val(),
+                        confirm:$('#confirm').val(),
+                        },
+                    success:function(){$('body').load('hello')},
+                    error:function(a){
+                    if(a.responseText==='用户名已存在'){
+                        $('io').empty()
+                        b=a.responseText
+                        $('io').eq(0).append(b)
+                        $('io').eq(0).css('color','red')
+                        }
+                    else if(a.responseText==='Email已注册'){  
+                        $('io').empty()  
+                        b=a.responseText   
+                        $('io').eq(1).append(b)
+                        $('io').eq(1).css('color','red')
+                        }
+                    else if(a.responseText==='用户名不能为空'){  
+                        $('io').empty()  
+                        b=a.responseText   
+                        $('io').eq(0).append(b)
+                        $('io').eq(0).css('color','red')
+                        }
+                    else if(a.responseText==='密码不能为空'){  
+                        $('io').empty()  
+                        b=a.responseText   
+                        $('io').eq(2).append(b)
+                        $('io').eq(2).css('color','red')
+                        }
+                    else if(a.responseText==='两次密码不相同'){
+                        $('io').empty()  
+                        b=a.responseText   
+                        $('io').eq(3).append(b)
+                        $('io').eq(3).css('color','red') 
+                        }
+                    }
+                    })
+                })
+            })
+            </script>
+        </head>
+        <body>
+            <p>
+                User Name:<br>
+                <input id='username' type="text" name="username" /><io></io><br>
+            </p>
+            <p>
+                E-mail:<br>
+                <input id='email' type="text" name='E-mail' /><io></io><br>
+            </p>
+            <p>
+                Password:<br>
+                <input id='password' type="password" name="password" /><io></io><br>
+            </p>
+            <p>
+                confirm password:<br>
+                <input id='confirm' type="password" name="confirm" /><io></io><br>
+            </p>
+            <p>
+                <input id='button' type="button" value="registered">
+            </p>
+        </body>
+</html> 
+      

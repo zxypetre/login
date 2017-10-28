@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>registered Page</title>
+    </head>
+    <body>
+        <form action="{{ url_for("registered") }}" method="POST">
+        <p>
+            User Name:<br>
+            <input type="text" name="username" /><br>
+        </p>
+        <p>
+            E-mail:<br>
+            <input type="text" name='E-mail' /><br>
+        </p>
+        <p>
+            Password:<br>
+            <input type="password" name="password" /><br>
+        </p>
+        <p>
+            confirm password:<br>
+            <input type="password" name="confirm password" /><br>
+        </p>
+        <p>
+            <input type="submit" value="registered">
+        </p>
+        </form>
+    </body>
+  </html> 
+  
+    
