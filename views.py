@@ -104,11 +104,20 @@ def registered():
         user.insert({'username':username,'password':password,'E-mail':Email})
         return json.dumps({"errcode":0})
 
-@app.route('/forgotten_password',methods=['GET','POST'])
+@app.route('/forgotten_password')
 def forgotten_password():
     send_email()
     #return render_template('forgotten.html')
     return json.jumps({"errcode":0})
+
+@app.route('/email_change_password',methods=['GET','POST'])
+def email_change_password():
+    username = request.values.get('username')
+    password = request.values.get('password')
+    confirm_password = request.values.get('confirm_password')
+    if password == confirm_password:
+        return json.dumps({"errcode":0})
+    return json.dumps({"errcode":1,"msg":"两次密码不相同"})
 
 @app.route('/change_password',methods=['GET','POST'])
 def change_password():
