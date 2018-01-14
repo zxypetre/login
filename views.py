@@ -46,7 +46,6 @@ def login():
         #return '密码错误',code
         return json.dumps({"errcode":1,"msg":"密码错误","code":410})
     elif T['password']==password:
-        print('i')
         #resp=make_response(render_template('hello.html'))
         Uuid = str(uuid.uuid4())
         rdb.mset(username=Uuid)
@@ -133,6 +132,11 @@ def change_password():
     #return render_template('change_password.html')
     return json.dumps({"errcode":1,"msg":"密码不相同","code":400})    
 
+@app.route('/logout',methods=['GET','POST'])
+def logout():
+    username = request.values.get('username')
+    rdb.delete('username')
+    return json.dumps({"errcode":0})
 
 app.run(debug=True,host='0.0.0.0')
 
